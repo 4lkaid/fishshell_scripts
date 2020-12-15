@@ -11,6 +11,7 @@ function startVPN
         checkConfig
         echo openvpn 启动中...
         sudo openvpn --config $config &>/dev/null &
+        sleep 1
         if [ (checkStart) -eq 0 ]
             echo openvpn 启动失败
         else
