@@ -44,6 +44,23 @@ function checkConfig
         echo 请检查 .ovpn 文件是否存在
         exit
     end
+    if [ (count $config) -gt 1 ]
+        echo -e 请选择要使用的 .ovpn 文件
+        set key 1
+        for conf in $config
+            echo -e $key: $conf
+            set key (expr $key + 1)
+        end
+        while read num
+            switch $num
+                case -le (count $config) and -ge 1
+                    set config $config[$num]
+                    break
+                case '*'
+                    echo 请重新选择要使用的 .ovpn 文件
+            end
+        end
+    end
 end
 
 if [ (count $argv) -ne 1 ]
