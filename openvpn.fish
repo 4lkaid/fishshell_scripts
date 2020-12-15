@@ -8,6 +8,7 @@ end
 
 function startVPN
     if [ (checkStart) -eq 0 ]
+        checkConfig
         echo openvpn 启动中...
         sudo openvpn --config $config &>/dev/null &
         if [ (checkStart) -eq 0 ]
@@ -37,6 +38,17 @@ function checkStart
     end
 end
 
+function checkConfig
+    if [ (count $config) -eq 0 ]
+        echo 请检查 .ovpn 文件是否存在
+        exit
+    end
+end
+
+if [ (count $argv) -ne 1 ]
+    echo '无效的参数(start or stop or status)'
+    exit
+end
 if [ $argv[1] = status ]
     ps aux | grep 'openvpn --config'
     exit
