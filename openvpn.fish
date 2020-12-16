@@ -41,7 +41,7 @@ end
 
 function checkConfig
     if [ (count $config) -eq 0 ]
-        echo 请检查 .ovpn 文件是否存在
+        echo 请检查当前路径下 .ovpn 文件是否存在
         exit
     end
     if [ (count $config) -gt 1 ]
